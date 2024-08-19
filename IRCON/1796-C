@@ -1,0 +1,42 @@
+
+
+#include <bits/stdc++.h>
+using namespace std;
+
+#define int long long 
+int mod=998244353;
+
+int longestLength(int l,int r){
+	int c=1;
+	while(l*2<=r){
+		c++;
+		l=l*2;
+	}
+	return c;
+}
+
+void solve() {
+    int l,r;
+    cin>>l>>r;
+    int len=longestLength(l,r);
+    
+    int peak1=r/(pow(2,len-1)); 
+    int a=(peak1-l+1);
+    
+    int peak2=(r)/(pow(2,len-2)*3); 
+    int b=max(0LL,peak2-l+1);
+    len--;
+    if(b!=0){
+    	a+=((b%mod)*(len%mod))%mod;
+    }
+    cout<<len+1<<" "<<a<<endl;
+}
+
+signed main() {
+    ios_base::sync_with_stdio();cin.tie(0);
+    int t = 1;
+    cin >> t;
+    for (int i = 0; i < t; i++) {
+        solve();
+    }
+}
