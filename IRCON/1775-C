@@ -1,0 +1,51 @@
+
+
+#include <bits/stdc++.h> 
+using namespace std;
+
+ 
+#define int long long  
+
+int f(int left, int right){
+    int count = 0; 
+    while (left != right) {
+        left >>= 1;
+        right >>= 1;
+        count++;
+    }
+    return right <<= count;
+}
+
+void solve() {
+    int n,x;
+    cin>>n>>x;
+    int l=n-1;
+    int r=2*1e18;
+    int ans=-1; 
+    while(l+1<r){
+    	int m=(r-l)/2+(l);
+    	int val=f(n,m);
+    	if(val<=x){
+    		if(val==x){
+    			ans=m;
+    		} 
+    		r=m;
+    	}else{
+    		l=m;
+    	}
+    }
+    if(f(n,r)!=x){
+    	cout<<-1<<endl;
+    	return;
+    }
+    cout<<r<<endl;
+}
+
+signed main() {
+    ios_base::sync_with_stdio();cin.tie(0);
+    int t = 1;
+    cin >> t;
+    for (int i = 0; i < t; i++) {
+        solve();
+    }
+}
